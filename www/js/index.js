@@ -34,6 +34,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        navigator.compass.getCurrentHeading(onSuccess, onError);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -45,5 +46,15 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+    // onSuccess: Get the current heading
+    //
+    onSuccess: function(heading) {
+       alert('Heading!: ' + heading.magneticHeading);
+    },
+    // onError: Failed to get the heading
+    //
+   	onError: function(compassError) {
+		alert('Compass Error: ' + compassError.code);
     }
 };
